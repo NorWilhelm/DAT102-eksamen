@@ -1,20 +1,22 @@
-public class TreeNode {
+package no.hvl.dat102.tre;
 
-    private int data;
-    private TreeNode leftChild;
-    private TreeNode rightChild;
+public class TreeNode<T extends Comparable<T>> {
 
-    public TreeNode (int data) {
+    private T data;
+    private TreeNode<T> leftChild;
+    private TreeNode<T> rightChild;
+
+    public TreeNode (T data) {
         this.data = data;
     }
 
-    public void insert(int value) {
+    public void insert(T value) {
         if (value == data)
             return;
 
-        if (value < data) {
+        if (value.compareTo(data) < 0) {
             if (leftChild == null) {
-                leftChild = new TreeNode(value);
+                leftChild = new TreeNode<>(value);
             }
             else {
                 leftChild.insert(value);
@@ -22,7 +24,7 @@ public class TreeNode {
         }
         else {
             if (rightChild == null) {
-                rightChild = new TreeNode(value);
+                rightChild = new TreeNode<>(value);
             }
             else {
                 rightChild.insert(value);
@@ -30,12 +32,12 @@ public class TreeNode {
         }
     }
 
-    public TreeNode get(int value) {
-        if (value == data) {
+    public TreeNode<T> get(T value) {
+        if (value.compareTo(data) == 0) {
             return this;
         }
 
-        if (value < data) {
+        if (value.compareTo(data) < 0) {
             if (leftChild != null)
                 return leftChild.get(value);
         }
@@ -47,14 +49,14 @@ public class TreeNode {
     }
 
     // brukes for å slette et element. Alternativet er å returnere TreeNode, men da må slettemetoden bruke TreeNode.get()
-    public int min() {
+    public T min() {
         if (leftChild == null)
             return data;
         else
             return leftChild.min();
     }
 
-    public int max() {
+    public T max() {
         if (rightChild == null)
             return data;
         else
@@ -71,21 +73,18 @@ public class TreeNode {
         }
     }
 
-    public int getData() { return data; }
+    public T getData() { return data; }
+    public void setData(T data) { this.data = data; }
 
-    public void setData(int data) { this.data = data; }
-
-    public TreeNode getLeftChild() { return leftChild; }
-
-    public void setLeftChild(TreeNode leftChild) {
+    public TreeNode<T> getLeftChild() { return leftChild; }
+    public void setLeftChild(TreeNode<T> leftChild) {
         this.leftChild = leftChild;
     }
 
-    public TreeNode getRightChild() {
+    public TreeNode<T> getRightChild() {
         return rightChild;
     }
-
-    public void setRightChild(TreeNode rightChild) {
+    public void setRightChild(TreeNode<T> rightChild) {
         this.rightChild = rightChild;
     }
 }

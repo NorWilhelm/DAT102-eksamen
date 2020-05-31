@@ -1,8 +1,10 @@
-public class Tree {
+package no.hvl.dat102.tre;
 
-    private TreeNode root;
+public class Tree<T extends Comparable<T>> {
 
-    public void insert(int value) {
+    private TreeNode<T> root;
+
+    public void insert(T value) {
         if (root == null) {
             root = new TreeNode(value);
         }
@@ -11,25 +13,28 @@ public class Tree {
         }
     }
 
-    public TreeNode get(int value) {
+    public TreeNode get(T value) {
         if (root != null)
             return root.get(value);
 
         return null;
     }
 
-    public void delete(int value) {
+    // value is the index in the tree
+    public void delete(T value) {
         root = delete(root, value);
     }
 
-    private TreeNode delete(TreeNode subtreeRoot, int value) {
+    private TreeNode<T> delete(TreeNode<T> subtreeRoot, T value) {
         if (subtreeRoot == null)
             return subtreeRoot;
 
-        if (value < subtreeRoot.getData())
+        if (value.compareTo(subtreeRoot.getData()) < 0)
             subtreeRoot.setLeftChild(delete(subtreeRoot.getLeftChild(), value));
-        else if (value > subtreeRoot.getData())
+
+        else if (value.compareTo(subtreeRoot.getData()) > 0)
             subtreeRoot.setRightChild(delete(subtreeRoot.getRightChild(), value));
+
         else {
             // Cases 1 and 2: Node to delete has 0 or 1 child(ren)
             if (subtreeRoot.getLeftChild() == null)
@@ -49,16 +54,16 @@ public class Tree {
         return subtreeRoot;
     }
 
-    public int min() {
+    public T min() {
         if (root == null)
-            return Integer.MIN_VALUE;
+            return null; // Kan resultere i nullPointer Exception
         else
             return root.min();
     }
 
-    public int max() {
+    public T max() {
         if (root == null)
-            return Integer.MAX_VALUE;
+            return null; // Kan resultere i nullPointer Exception
         else
             return root.max();
     }
