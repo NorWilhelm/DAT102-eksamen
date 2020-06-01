@@ -4,6 +4,7 @@ import java.util.EmptyStackException;
 
 public class ArrayStack {
 
+    // Kan også bruke generisk type
     private Employee[] stack;
     private int top;
 
@@ -45,9 +46,8 @@ public class ArrayStack {
     }
 
     public void printStack() {
-        for (int i = top - 1; i >= 0; i--) {
+        for (int i = top - 1; i >= 0; i--)
             System.out.println(stack[i]);
-        }
     }
 
 }
