@@ -1,4 +1,4 @@
-package no.hvl.dat102.tre;
+package no.hvl.dat102.treGenerisk;
 
 public class TreeNode<T extends Comparable<T>> {
 
